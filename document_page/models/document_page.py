@@ -38,6 +38,7 @@ class DocumentPage(models.Model):
         help="Name for the changes made",
         related="history_head.name",
         readonly=False,
+        default="Rev 1"
     )
 
     draft_summary = fields.Char(
@@ -45,6 +46,7 @@ class DocumentPage(models.Model):
         help="Describe the changes made",
         related="history_head.summary",
         readonly=False,
+        default="Changes"
     )
 
     template = fields.Html(
