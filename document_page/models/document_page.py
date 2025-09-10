@@ -95,6 +95,24 @@ class DocumentPage(models.Model):
         help="Use it to link resources univocally",
         compute="_compute_backend_url",
     )
+    preview_html = fields.Html(
+        string="Preview HTML",
+        compute="_compute_preview_html",
+        store=True,
+        help="Short HTML preview of the content for kanban display.",
+    )
+
+    @api.depends("content")
+    def _compute_preview_html(self):
+        for rec in self:
+            if rec.type == "content" and rec.content:
+                html = rec.content or ""
+                if len(html) > 400:
+                    rec.preview_html = html[:400] + "..."
+                else:
+                    rec.preview_html = html
+            else:
+                rec.preview_html = ""
 
     @api.depends("menu_id", "parent_id.menu_id")
     def _compute_backend_url(self):

@@ -13,13 +13,12 @@
             </tree>
         </field>
     </record>
-    <!-- wiki list view  -->
     <!-- wiki kanban view  -->
     <record id="view_wiki_kanban" model="ir.ui.view">
         <field name="name">document.page.kanban</field>
         <field name="model">document.page</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="parent_id">
+            <kanban>
                 <field name="name" />
                 <field name="parent_id" />
                 <field name="company_id" />
@@ -28,14 +27,11 @@
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
-                            <div class="o_kanban_record_title">
+                            <div class="o_kanban_record_title" style="margin-bottom: 4px;">
                                 <strong><field name="name"/></strong>
                             </div>
-                            <div>
-                                <field name="content_uid"/>
-                            </div>
-                            <div>
-                                <field name="content_date"/>
+                            <div class="o_kanban_note_preview" style="font-size: 12px; color: #555; max-height: 3.6em; overflow: hidden; text-overflow: ellipsis; line-height: 1.2em; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+                                <field name="preview_html"/>
                             </div>
                         </div>
                     </t>
@@ -85,6 +81,7 @@
                         placeholder="e.g. Once upon a time..."
                         required="1"
                         options="{'safe': True, 'codeview': True, 'collaborative': True}"
+                        style="min-height: 400px;"
                     />
                     <notebook>
                         <page name="info" string="Information">
@@ -94,7 +91,7 @@
                                         name="parent_id"
                                         required="True"
                                         string="Category"
-                                        context="{'default_type':'category', 'form_view_ref': 'document_page.view_category_form'}"
+                                        context="{'default_type':'category', 'form_view_ref': 'document_page.view_category_form', 'default_parent_id': context.get('default_parent_id')}"
                                     />
                                     <field
                                         name="company_id"
@@ -211,18 +208,25 @@
         <field name="name">Pages</field>
         <field name="res_model">document.page</field>
         <field name="domain">[('type','=','content')]</field>
-        <field name="context">{'default_type': 'content'}</field>
+        <field name="context">{'default_type': 'content', 'default_parent_id': context.get('default_parent_id')}</field>
+        <!-- context still not working wip -->
         <field name="view_mode">kanban,tree,form</field>
         <field name="view_id" ref="view_wiki_kanban" />
         <field name="search_view_id" ref="view_wiki_filter" />
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
-                Click to create a new web page.
+                No pages created
             </p>
         </field>
     </record>
-    <record id="action_page_view_tree" model="ir.actions.act_window.view">
+    <record id="action_page_view_kanban" model="ir.actions.act_window.view">
         <field name="sequence" eval="0" />
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="view_wiki_kanban" />
+        <field name="act_window_id" ref="action_page" />
+    </record>
+    <record id="action_page_view_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_wiki_tree" />
         <field name="act_window_id" ref="action_page" />
