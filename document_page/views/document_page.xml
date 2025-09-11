@@ -30,7 +30,7 @@
                             <div class="o_kanban_record_title" style="margin-bottom: 4px;">
                                 <strong><field name="name"/></strong>
                             </div>
-                            <div class="o_kanban_note_preview" style="font-size: 12px; color: #555; max-height: 3.6em; overflow: hidden; text-overflow: ellipsis; line-height: 1.2em; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+                            <div class="o_kanban_note_preview" style="max-height: 3.6em; overflow: hidden; text-overflow: ellipsis; line-height: 1.2em; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
                                 <field name="preview_html"/>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                         name="parent_id"
                                         required="True"
                                         string="Category"
-                                        context="{'default_type':'category', 'form_view_ref': 'document_page.view_category_form', 'default_parent_id': context.get('default_parent_id')}"
+                                        context="{'default_type':'category', 'form_view_ref': 'document_page.view_category_form'}"
                                     />
                                     <field
                                         name="company_id"

@@ -18,7 +18,7 @@
                                 class="o_value"
                             />
                         </b>
-                        <span class="o_label">Wiki Pages</span>
+                        <i class="fa fa-newspaper-o"></i>
                     </div>
                 </a>
             </xpath>
@@ -37,7 +37,7 @@
                     icon="fa-book"
                 >
                     <field
-                        string="Wiki Pages"
+                        string="Knowledge Pages"
                         name="document_page_count"
                         widget="statinfo"
                     />

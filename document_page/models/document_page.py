@@ -194,6 +194,12 @@ class DocumentPage(models.Model):
             and self.parent_id.type == "category"
         ):
             self.content = self.parent_id.template
+            
+    #Attempt to overcome the issue of the html preview not appearing on create always. May remove in the future.
+    def create(self, vals_list):
+        record = super().create(vals_list)
+        record._compute_preview_html()
+        return record
 
     def unlink(self):
         menus = self.mapped("menu_id")
