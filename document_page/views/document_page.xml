@@ -18,7 +18,7 @@
         <field name="name">document.page.kanban</field>
         <field name="model">document.page</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="parent_id">
+            <kanban default_group_by="parent_id" group_create="false" group_edit="false" group_delete="false" >
                 <field name="name" />
                 <field name="parent_id" />
                 <field name="company_id" />
