@@ -31,7 +31,7 @@
                                 <strong><field name="name"/></strong>
                             </div>
                             <div class="o_kanban_note_preview" style="max-height: 3.6em; overflow: hidden; text-overflow: ellipsis; line-height: 1.2em; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
-                                <field name="preview_html"/>
+                                <field name="content"/>
                             </div>
                         </div>
                     </t>
