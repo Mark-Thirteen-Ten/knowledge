@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2022 Manuel Regidor <manuel.regidor@sygel.es>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
-<odoo noupdate="1">
+<odoo>
     <record id="document_page_rule" model="ir.rule">
         <field name="name">Document Page Access</field>
         <field name="model_id" ref="model_document_page" />
@@ -12,7 +12,7 @@
         />
         <field
             name="domain_force"
-        >['|', ('groups_id', 'in', [g.id for g in user.groups_id]), '|', ('user_ids', 'in', [user.id]), '&amp;', ('groups_id', '=', False), ('user_ids', '=', False)]</field>
+        >['|', ('groups_id', 'in', [g.id for g in user.groups_id]), '|', ('user_ids', 'in', [user.id]), '&amp;', ('groups_id', '=', False), '&amp;', ('user_ids', '=', False), '|', ('parent_id.groups_id', 'in', [g.id for g in user.groups_id]), '|', ('parent_id.user_ids', 'in', [user.id]), '&amp;', ('parent_id.groups_id', '=', False), ('parent_id.user_ids', '=', False)]</field>
     </record>
     <record id="document_page_rule_full_access" model="ir.rule">
         <field name="name">Document Page Full Access</field>
